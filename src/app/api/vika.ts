@@ -43,7 +43,9 @@ export async function getRecords(token: string, datasheetId: string) {
   const table = vika.datasheet(datasheetId);
   const fields = await getTableFields(table);
   const views = (await table.views.list()).data?.views || [];
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const chunks = await table.records.queryAll({ viewId: views[0].id });
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const result: any[] = [];
   for await (const records of chunks) {
     records.forEach((record) => {

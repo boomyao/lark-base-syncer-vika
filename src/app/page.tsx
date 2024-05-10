@@ -33,7 +33,7 @@ export default function Home() {
       {messageHolder}
       <Form>
         <FormItem label="API令牌">
-          <Input type="text" placeholder='usxx**********xxxx' value={vikaToken} onChange={e => setVikaToken(e.target.value)} />
+          <Input type="password" placeholder='usxx**********xxxx' value={vikaToken} onChange={e => setVikaToken(e.target.value)} />
         </FormItem>
         <FormItem label="维格表">
           <Input type="text" placeholder='维格表 ID' value={datasheetId} onChange={e => setDatasheetId(e.target.value)} />
