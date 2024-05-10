@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const params = JSON.parse(body.params);
     const datasourceConfig = JSON.parse(params.datasourceConfig);
 
-    const tableFields = getFields(datasourceConfig.vikaToken, datasourceConfig.datasheetId);
+    const tableFields = await getFields(datasourceConfig.vikaToken, datasourceConfig.datasheetId);
     const message = {
       code: 0,
       data: {

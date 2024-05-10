@@ -44,7 +44,7 @@ export async function getRecords(token: string, datasheetId: string) {
   const fields = await getTableFields(table);
   const views = (await table.views.list()).data?.views || [];
   const chunks = await table.records.queryAll({ viewId: views[0].id });
-  const result = [];
+  const result: any[] = [];
   for await (const records of chunks) {
     records.forEach((record) => {
       result.push({
@@ -56,7 +56,11 @@ export async function getRecords(token: string, datasheetId: string) {
         }, {} as Record<string, any>)
       })
     });
+    // sleep 1s to avoid rate limit
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
+
+  return result;
 }
 
 async function getTableFields(table: Datasheet) {
