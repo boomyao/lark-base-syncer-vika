@@ -22,7 +22,9 @@ async function validateSignature(req: NextRequest) {
   const timestamp = headers.get('x-base-request-timestamp');
   const sig = headers.get('x-base-signature');
 
-  if (!nonce || !timestamp || !sig) {
+  if (!sig) return true;
+
+  if (!nonce || !timestamp) {
     return false;
   }
   
