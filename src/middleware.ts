@@ -16,7 +16,7 @@ export const config = {
 }
 
 async function validateSignature(req: NextRequest) {
-  const body = req.body;
+  const bodyStr = await req.text();
   const headers = req.headers;
   const nonce = headers.get('x-base-request-nonce');
   const timestamp = headers.get('x-base-request-timestamp');
@@ -26,7 +26,7 @@ async function validateSignature(req: NextRequest) {
     return false;
   }
   
-  const str = timestamp + nonce + secretKey + JSON.stringify(body);
+  const str = timestamp + nonce + secretKey + bodyStr;
 
   const encoder = new TextEncoder();
   const data = encoder.encode(str);

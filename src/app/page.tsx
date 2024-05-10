@@ -15,11 +15,13 @@ export default function Home() {
   const handleSubmitClick = async () => {
     try {
       const vika = new Vika({ token: vikaToken })
-      vika.datasheet(datasheetId)
+      const res = await vika.datasheet(datasheetId).views.list()
+      const name = res.data?.views[0].name || '维格表';
 
       bitable.saveConfigAndGoNext({
         vikaToken,
         datasheetId,
+        datasheetName: name
       })
     } catch {
       messager.error('API令牌或维格表 ID 错误')
